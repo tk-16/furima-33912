@@ -12,8 +12,6 @@
 | last_name            | string  | null: false              |
 | first_name_kana      | string  | null: false              |
 | last_name_kana       | string  | null: false              |
-| birthyear            | date    | null: false              |
-| birthmonth           | date    | null: false              |
 | birthday             | date    | null: false              |
 
 
