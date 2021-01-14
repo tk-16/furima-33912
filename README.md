@@ -68,7 +68,7 @@
 | address          | string     | null: false                    |
 | building         | string     |                                |
 | telephone        | string     | null: false                    |
-| user             | references | null: false, foreign_key: true |
+| purchase         | references | null: false, foreign_key: true |
 
 
 
