@@ -3,11 +3,18 @@
 
 ## users テーブル
 
-| Column    　　　　　　 | Type   | Options     |
-| -------- 　　　　　　  | ------ | ----------- |
-| nickname 　　　　　　  | string | null: false |
-| email      　　　　　　| string | null: false |
-| encrypted_password   | string | null: false |
+| Column    　　　　　　 | Type    | Options     |
+| -------- 　　　　　　  | ------  | ----------- |
+| nickname 　　　　　　  | string  | null: false |
+| email      　　　　　　| string  | null: false |
+| encrypted_password   | string  | null: false |
+| first_name           | string  | null: false |
+| last_name            | string  | null: false |
+| first_name_kana      | string  | null: false |
+| last_name_kana       | string  | null: false |
+| birthyear            | integer | null: false |
+| birthmonth           | integer | null: false |
+| birthday             | integer | null: false |
 
 
 ### Association
@@ -21,22 +28,21 @@
 
 | Column           | Type       | Options                        |
 | ------           | ------     | -----------                    |
-| image            |            |                                |
 | name             | text       | null: false                    |
 | content          | text       | null: false                    |
-| category         | references | null: false, foreign_key: true |
-| condition        | references | null: false, foreign_key: true |
-| delivery_fee_id  | references | null: false, foreign_key: true |
-| delivery_area_id | references | null: false, foreign_key: true |
-| delivery_days_id | references | null: false, foreign_key: true |
+| category_id      | integer    | null: false,                   |
+| condition_id     | integer    | null: false,                   |
+| delivery_fee_id  | integer    | null: false,                   |
+| delivery_area_id | integer    | null: false,                   |
+| delivery_days_id | integer    | null: false,                   |
 | price            | integer    | null: false,                   |
-| user_id          | references | null: false, foreign_key: true |
+| user             | references | null: false, foreign_key: true |
 
 
 ### Association
 
 - belongs_to :user
-- has_one   :purchases, dependent: :destroy
+- has_one   :purchase, dependent: :destroy
 
 
 
@@ -44,32 +50,31 @@
 
 | Column     | Type       | Options                        |
 | ------     | ---------- | ------------------------------ |
-| user_id    | references | null: false, foreign_key: true |
-| item_id    | references | null: false, foreign_key: true |
+| user       | references | null: false, foreign_key: true |
+| item       | references | null: false, foreign_key: true |
 
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
-- has_one  :addresses
+- has_one  :address
 
 ## addresses テーブル
 
-| Column         | Type       | Options                        |
-| ------         | ---------- | ------------------------------ |
-| post_cord      | integer    | null: false                    |
-| prefectures    | string     | null: false                    |
-| municipalities | string     | null: false                    |
-| address        | string     | null: false                    |
-| building       | string     | null: false                    |
-| telephone      | integer    | null: false                    |
-| user_id        | references | null: false, foreign_key: true |
+| Column           | Type       | Options                        |
+| ------           | ---------- | ------------------------------ |
+| post_cord        | string     | null: false                    |
+| delivery_area_id | integer    | null: false                    |
+| municipalities   | string     | null: false                    |
+| address          | string     | null: false                    |
+| telephone        | string     | null: false                    |
+| user             | references | null: false, foreign_key: true |
 
 
 
 ### Association
 
-- belongs_to :purchases
+- belongs_to :purchase
 
 
