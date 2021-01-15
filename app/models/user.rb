@@ -4,7 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :nickname, presence: true
+  with_options presence: true do
+    validates :nickname
+    validates :birthday
+  end
 
   with_options format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i, message: '半角英数字を使用してください' } do
     validates :password
@@ -20,5 +23,5 @@ class User < ApplicationRecord
     validates :last_name_kana
   end
 
-  validates :birthday, presence: true
+  
 end
