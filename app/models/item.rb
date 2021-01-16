@@ -3,6 +3,17 @@ class Item < ApplicationRecord
   has_one   :purchase, dependent: :destroy
   has_one_attached :image
 
+  with_options presence: true do
+    validates :name
+    validates :content
+    validates :category
+    validates :condition
+    validates :delivery_fee
+    validates :delivery_area
+    validates :delivery_day
+    validates :price
+  end
+
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :condition
