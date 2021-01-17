@@ -6,13 +6,21 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :name
     validates :content
-    validates :category
-    validates :condition
-    validates :delivery_fee
-    validates :delivery_area
-    validates :delivery_day
+    validates :category_id
+    validates :condition_id
+    validates :delivery_fee_id
+    validates :delivery_area_id
+    validates :delivery_day_id
+    validates :image
+  end
+
+  #validates :name, length: {maximum: 40 }
+
+  with_options presence: true,numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999} do
     validates :price
   end
+
+  validates :price, numericality: { with: /\A[0-9]+\z/, message: '半角数字を使用してください' }
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
@@ -20,7 +28,6 @@ class Item < ApplicationRecord
   belongs_to :delivery_area
   belongs_to :delivery_day
   belongs_to :delivery_fee
-
 
   validates :category_id, numericality: { other_than: 1 }
   validates :condition_id, numericality: { other_than: 1 }
