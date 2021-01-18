@@ -31,13 +31,13 @@ RSpec.describe Item, type: :model do
       end
 
       it 'condition_idが1では登録できないこと' do
-        @item.condition_id = nil
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition Select")
       end
 
       it 'delivery_area_idが1では登録できないこと' do
-        @item.delivery_area_id = nil
+        @item.delivery_area_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery area Select")
       end
@@ -67,10 +67,24 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceが¥300~¥9,999,999の間以外では登録できないこと' do
-        @item.price = '200'
+        @item.price = 200
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
+
+      it 'priceが¥10,000,000以上では登録できないこと' do
+        @item.price = 10000000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+      end
+
+      it 'imageが空では登録できないこと' do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
+
+
 
       
     end
