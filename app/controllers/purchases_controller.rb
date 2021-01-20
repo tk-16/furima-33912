@@ -4,8 +4,9 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    @purchase_address = PurchaseAddress.new(purchase_params)
     binding.pry
+    
+    @purchase_address = PurchaseAddress.new(purchase_params)
     
       if @purchase_address.valid?
         @purchase_address.save
@@ -18,6 +19,7 @@ class PurchasesController < ApplicationController
 
   private
   def purchase_params
-    params.require(:purchase_address).permit(:post_cord,:delivery_area_id,:municipalities,:address,:building,:telephone,:purchase).merge(user_id: current_user.id, item_id: params[:item_id] )
+    params.require(:purchase_address).permit(:post_cord,:delivery_area_id,:municipalities,:address,:building,:telephone,:purchase).merge(user_id: current_user.id, item_id: params[:item_id],token: params[:token])
+
   end
 end
