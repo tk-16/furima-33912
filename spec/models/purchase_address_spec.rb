@@ -6,6 +6,12 @@ RSpec.describe PurchaseAddress, type: :model do
       @purchase_address = FactoryBot.build(:purchase_address)
     end
     
+    context '購入ができる時' do
+      it 'token,user_id, item_id,post_cord,delivery_area_id,municipalities,address,:telephone,:purchaseが存在すれば登録できること' do
+        expect(@purchase_address).to be_valid
+      end
+
+    end
     context '購入ができない時' do
       it 'post_cordが空では登録できないこと' do
         @purchase_address.post_cord = nil
@@ -47,6 +53,18 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.token = nil
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
+      end
+
+      it "user_idが空では登録できないこと" do
+        @purchase_address.user_id = nil
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("User can't be blank")
+      end
+
+      it "item_idが空では登録できないこと" do
+        @purchase_address.item_id = nil
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
       end
 
     end
