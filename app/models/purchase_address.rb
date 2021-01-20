@@ -1,6 +1,6 @@
 class PurchaseAddress
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id,:post_cord,:delivery_area_id,:municipalities,:address,:building,:telephone,:purchase
+  attr_accessor :token,:user_id, :item_id,:post_cord,:delivery_area_id,:municipalities,:address,:building,:telephone,:purchase
 
   
   with_options presence: true do
@@ -9,6 +9,7 @@ class PurchaseAddress
     validates :municipalities
     validates :address
     validates :telephone,format: { with: /\A\d{11}\z/, message: 'Input only number' }
+    validates :token
   end
 
   
