@@ -11,6 +11,10 @@ RSpec.describe PurchaseAddress, type: :model do
         expect(@purchase_address).to be_valid
       end
 
+      it "buildingが空でも登録できる" do
+        @purchase_address.building = ""
+        expect(@purchase_address).to be_valid
+      end
     end
     context '購入ができない時' do
       it 'post_cordが空では登録できないこと' do
@@ -65,6 +69,18 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.item_id = nil
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
+      end
+
+      it 'delivery_area_idが1では登録できないこと' do
+        @purchase_address.delivery_area_id = 1
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Delivery area Select")
+      end
+
+      it 'telephoneが英数混合では登録できないこと' do
+        @purchase_address.telephone = "012345aaaaaa"
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Telephone Input only number")
       end
 
     end
